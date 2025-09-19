@@ -1,10 +1,14 @@
 from functools import partial
 
-from PySide6.QtCore import *
-from PySide6.QtWidgets import *
-from PySide6.QtGui import *
+try:
+    from PySide6.QtCore import *
+    from PySide6.QtWidgets import *
+    from PySide6.QtGui import *
+except ModuleNotFoundError:
+    from PySide2.QtCore import *
+    from PySide2.QtWidgets import *
+    from PySide2.QtGui import *
 
-from rigCore.core import create_matrix_constraint_on_selected
 from .core import *
 from .utils import *
 
@@ -43,7 +47,7 @@ class CreateJointsOnCurve(QDialog):
         create_joints_on_selected_curve(n_joints, name)
 
 
-class RigToolbox(QDialog):
+class RigToolbox(DockableWidget):
 
     def __init__(self, parent=None):
         if parent is None:
@@ -177,6 +181,4 @@ class RigToolbox(QDialog):
 
 
 def open_rig_toolbox():
-    ui = RigToolbox()
-    ui.show()
-    return ui
+    RigToolbox.open_in_workspace()

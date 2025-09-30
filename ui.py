@@ -58,6 +58,9 @@ class RigToolbox(DockableWidget):
         self.resize(500, 700)
 
         # utils
+        set_default_value_btn = QPushButton('set as default value')
+        set_default_value_btn.clicked.connect(set_default_value_on_selected)
+
         matrix_constraint_btn = QPushButton('create matrix constraint')
         matrix_constraint_btn.clicked.connect(create_matrix_constraint_on_selected)
 
@@ -89,6 +92,7 @@ class RigToolbox(DockableWidget):
         utils_layout = QVBoxLayout()
         utils_layout.addWidget(matrix_constraint_btn)
         utils_layout.addWidget(create_locator_on_gizmo_btn)
+        utils_layout.addWidget(set_default_value_btn)
         utils_layout.addWidget(joints_on_curve_btn)
         utils_layout.addLayout(split_bone_layout)
 

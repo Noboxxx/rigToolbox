@@ -123,6 +123,20 @@ def create_matrix_constraint(parent, child, maintain_offset=True, translation=Tr
     return data
 
 @chunk
+def set_default_value_on_selected():
+    selected_nodes = cmds.ls(sl=True)
+    selected_attributes = cmds.channelBox('mainChannelBox', selectedMainAttributes=True, q=True)
+
+    for node in selected_nodes:
+        for attribute in selected_attributes:
+            plug = f'{node}.{attribute}'
+            current_value = cmds.getAttr(plug)
+
+            cmds.addAttr(plug, defaultValue=current_value, e=True)
+
+    print(selected_attributes)
+
+@chunk
 def create_matrix_constraint_on_selected():
     selection = cmds.ls(sl=True)
 
